@@ -3,8 +3,8 @@ USE Restaurante;
 
 CREATE TABLE tbFuncionario(
 	IdFun int(2) not null auto_increment,
-    Email varchar(50) not null,
-    Senha varchar(8) not null,
+  Email varchar(50) not null,
+  Senha varchar(8) not null,
 	Nome varchar(50) not null,
 	CPF varchar(14) not null,
 	Endereco varchar(150) not null,
@@ -27,7 +27,7 @@ CREATE TABLE tbPedidos(
 	DataPedido date not null,
 	IdFun int(5) not null,
 	IdMesa int(5) not null,
-    Ativo int(1) not null,
+  Ativo int(1) not null,
 
 	foreign key (IdFun) references tbFuncionario(IdFun),
 	foreign key (IdMesa) references tbMesa(idMesa),
@@ -179,10 +179,10 @@ VALUES
 
 
 INSERT INTO tbMesa
-    (NumeroMesa,    Capacidade, Ativa)
+(NumeroMesa,    Capacidade, Ativa)
 VALUES
-    (1,             4,          1),
-    (2,             2,          1),
-    (3,             8,          1),
-    (4,             4,          1),
-    (5,             2,          1)
+(1,             4,          1),
+(2,             2,          1),
+(3,             8,          1),
+(4,             4,          1),
+(5,             2,          1)
