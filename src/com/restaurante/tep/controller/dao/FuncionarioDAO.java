@@ -72,8 +72,8 @@ public class FuncionarioDAO {
                             resultados.getString("Email"),
                             resultados.getString("Senha"),
                             resultados.getString("Nome"),
-                            resultados.getString("Endereco"),
                             resultados.getString("CPF"),
+                            resultados.getString("Endereco"),
                             resultados.getString("Telefone")
                         );
 
@@ -127,8 +127,8 @@ public class FuncionarioDAO {
                             resultados.getString("Email"),
                             resultados.getString("Senha"),
                             resultados.getString("Nome"),
-                            resultados.getString("Endereco"),
                             resultados.getString("CPF"),
+                            resultados.getString("Endereco"),
                             resultados.getString("Telefone")
                     );
                     System.out.println("Funcionário de id " + id + " obtido!");

@@ -19,10 +19,9 @@ public class FuncionarioTools {
     public static void imprimirFuncionario(Funcionario func) {
         if(validarFuncionario(func)) {
             System.out.printf(
-                    "id: %d\t|\t" + "nome: %s\t|\t" + "email: %s\t|\t" +
-                    "cpf: %s\t|\t" + "telefone: %s\t|\t" + "endereco: %s\n",
-                    func.getIdFun(), func.getNome(), func.getEmail(),
-                    func.getCpf(), func.getTelefone(), func.getEndereco()
+                "id: %d\t|\tnome: %s\t|\temail: %s\t|\tcpf: %s\t|\ttelefone: %s\t|\tendereco: %s\n",
+                func.getIdFun(), func.getNome(), func.getEmail(),
+                func.getCpf(), func.getTelefone(), func.getEndereco()
             );
         } else {
             System.err.println("Funcionário inválido, impossível ler");
@@ -53,9 +52,12 @@ public class FuncionarioTools {
 
         return contadorFun;
     }
+    
+    public static final int LOGIN_LIBERADO = 0;
+    public static final int SENHA_ERRADA = 1;
+    public static final int USUARIO_NAO_ENCONTRADO = 2;
 
-    public static boolean validarLogin(String cpfAtual, String senhaAtual, List<Funcionario> listaFun) {
-        boolean permitirLogin = false;
+    public static int validarLogin(String cpfAtual, String senhaAtual, List<Funcionario> listaFun) {
         boolean usuarioFoiEncontrado = false;
         boolean senhaEstaCorreta = false;
 
@@ -63,18 +65,14 @@ public class FuncionarioTools {
 
             if(cpfAtual.equals(fun.getCpf())) {
                 usuarioFoiEncontrado = true;
-
-                if(senhaAtual.equals(fun.getSenha())) {
+                
+                if(senhaAtual.equals(fun.getSenha()))
                     senhaEstaCorreta = true;
-                    permitirLogin = true;
-                    System.out.println("Login permitido!");
-                }
             }
         }
 
-        if(!usuarioFoiEncontrado) System.out.println("Usuário não encontrado!");
-        else if (!senhaEstaCorreta) System.out.println("Senha incorreta para o usuário!");
-
-        return permitirLogin;
+        if (usuarioFoiEncontrado == false) return USUARIO_NAO_ENCONTRADO;
+        else if (senhaEstaCorreta == false) return SENHA_ERRADA;
+        return LOGIN_LIBERADO;
     }
 }
