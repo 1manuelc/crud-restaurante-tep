@@ -245,7 +245,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBnovoPedidoActionPerformed
 
     private void jBcardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcardapioActionPerformed
-        Cardápio card = new Cardápio();
+        Cardapio card = new Cardapio();
         card.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBcardapioActionPerformed
