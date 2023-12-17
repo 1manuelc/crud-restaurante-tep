@@ -7,8 +7,6 @@ package com.restaurante.tep.view;
 
 import com.restaurante.tep.controller.dao.FuncionarioDAO;
 import com.restaurante.tep.model.Funcionario;
-import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -75,6 +73,11 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pesquise os funcionários do GineFood");
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel12.setBackground(new java.awt.Color(51, 51, 51));
@@ -163,8 +166,8 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
 
         btnNovoFuncionario.setBackground(new java.awt.Color(51, 102, 255));
         btnNovoFuncionario.setForeground(new java.awt.Color(255, 255, 255));
-        btnNovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
-        btnNovoFuncionario.setText("Novo funcionário");
+        btnNovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/report_edit.png"))); // NOI18N
+        btnNovoFuncionario.setText("Gerenciar funcionários");
         btnNovoFuncionario.setToolTipText("Realizar novo pedido");
         btnNovoFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +281,10 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         preencherTabelaFuncionarios();
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        preencherTabelaFuncionarios();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments

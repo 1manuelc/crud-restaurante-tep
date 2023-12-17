@@ -27,32 +27,6 @@ public class NovoPedido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel32 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel34 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel35 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         Principalpedidos = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -86,118 +60,6 @@ public class NovoPedido extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-
-        jPanel2.setBackground(new java.awt.Color(239, 239, 239));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-  
-        jLabel11.setText(" Meus pedidos");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 30));
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel32.setText("Nome");
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 27, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 47, 211, -1));
-
-        jLabel33.setText("Categoria");
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 27, -1, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 47, 109, -1));
-
-        jLabel34.setText("Unidade de medida");
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 27, -1, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 47, 95, -1));
-
-        jLabel35.setText("Preço");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 121, -1, -1));
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 143, 41, -1));
-
-        jLabel36.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel36.setText("R$");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 141, -1, 25));
-
-        jLabel37.setText("Descrição");
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 79, -1, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 95, 543, -1));
-
-        jLabel38.setText("Disponível");
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 121, -1, -1));
-
-        jRadioButton1.setText("Sim");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 142, -1, -1));
-
-        jRadioButton2.setText("Não");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 142, -1, -1));
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-
-        jButton1.setToolTipText("Pesquisar pedido");
-
-        jButton4.setBackground(new java.awt.Color(51, 102, 255));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-
-        jButton4.setText("Novo Pedido");
-        jButton4.setToolTipText("Realizar novo pedido");
-
-        jButton3.setBackground(new java.awt.Color(51, 204, 0));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-
-        jButton3.setText("Finalizar");
-        jButton3.setToolTipText("Finalizar pedido");
-
-        jButton6.setBackground(new java.awt.Color(255, 102, 0));
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-
-        jButton6.setText("Editar");
-        jButton6.setToolTipText("Editar pedido");
-
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-
-        jButton2.setText("Cancelar");
-        jButton2.setToolTipText("Cancelar pedido");
-
-        jTable2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Código", "Data", "Total", "Descrição", "Status", "Quantidade"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane2.setViewportView(jTable2);
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setText("Pedidos");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Realize um novo pedido!");
@@ -396,17 +258,9 @@ public class NovoPedido extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_PrincipalpedidosMouseClicked
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void jTprecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTprecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTprecoActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
 
 
     private void jTpesquisaPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTpesquisaPedActionPerformed
@@ -457,30 +311,14 @@ public class NovoPedido extends javax.swing.JFrame {
     private javax.swing.JLabel SairPedidos;
     private javax.swing.JButton jBbotaoPesquisa;
     private javax.swing.JButton jBsalvarPed;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jCcategoriaPed;
     private javax.swing.JComboBox<String> jCmesaPed;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFdataPed;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
@@ -489,26 +327,16 @@ public class NovoPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator15;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTdescricaoPed;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTpesquisaPed;
     private javax.swing.JTextField jTpreco;
     private javax.swing.JTextField jTqdePed;

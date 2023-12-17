@@ -91,6 +91,11 @@ public class Funcionarios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastre seus colaboradores!!");
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
@@ -508,6 +513,10 @@ public class Funcionarios extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        preencherTabelaFuncionarios();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments

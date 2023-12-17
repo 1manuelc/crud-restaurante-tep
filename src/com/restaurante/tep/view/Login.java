@@ -7,6 +7,7 @@ package com.restaurante.tep.view;
 
 import javax.swing.JOptionPane;
 import com.restaurante.tep.controller.dao.FuncionarioDAO;
+import com.restaurante.tep.controller.dao.RestauranteDAO;
 import com.restaurante.tep.controller.tools.FuncionarioTools;
 
 /**
@@ -31,15 +32,11 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jBentrar = new javax.swing.JButton();
+        btnCriarBanco = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         CampoUsuario = new javax.swing.JTextField();
@@ -47,16 +44,8 @@ public class Login extends javax.swing.JFrame {
         CampoSenha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jBsair = new javax.swing.JButton();
-
-        jMenu6.setText("File");
-        jMenuBar2.add(jMenu6);
-
-        jMenu7.setText("Edit");
-        jMenuBar2.add(jMenu7);
-
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+        btnEntrar = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Restaurante GineFood");
@@ -74,18 +63,19 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel5.setText("GineSoft");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 545, 41, 14));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setText("GineSoft, 2023");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 90, 14));
 
-        jBentrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/cancel.png"))); // NOI18N
-        jBentrar.setToolTipText("Sair");
-        jBentrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCriarBanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icon-cadastro.png"))); // NOI18N
+        btnCriarBanco.setText("Povoar banco de dados (primeiro acesso)");
+        btnCriarBanco.setToolTipText("Sair");
+        btnCriarBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBentrarActionPerformed(evt);
+                btnCriarBancoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBentrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 534, 60, -1));
+        jPanel1.add(btnCriarBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, 290, 30));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -109,16 +99,16 @@ public class Login extends javax.swing.JFrame {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jBsair.setBackground(new java.awt.Color(255, 102, 0));
-        jBsair.setForeground(new java.awt.Color(255, 255, 255));
-        jBsair.setText("Entrar");
-        jBsair.setToolTipText("Senha para 1° acesso:");
-        jBsair.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jBsair.setBorderPainted(false);
-        jBsair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBsair.addActionListener(new java.awt.event.ActionListener() {
+        btnEntrar.setBackground(new java.awt.Color(255, 102, 0));
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setText("Entrar");
+        btnEntrar.setToolTipText("Senha para 1° acesso:");
+        btnEntrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEntrar.setBorderPainted(false);
+        btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBsairActionPerformed(evt);
+                btnEntrarActionPerformed(evt);
             }
         });
 
@@ -131,7 +121,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
-                    .addComponent(jBsair, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                    .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                     .addComponent(jLabel3)
                     .addComponent(CampoSenha)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -156,11 +146,21 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jBsair, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 390, 270));
+
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/cancel.png"))); // NOI18N
+        btnFechar.setText(" Sair");
+        btnFechar.setToolTipText("Sair");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 80, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 570));
 
@@ -168,7 +168,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsairActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String cpf = CampoUsuario.getText();
         String senha = CampoSenha.getText();
         
@@ -194,11 +194,27 @@ public class Login extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jBsairActionPerformed
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
-    private void jBentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBentrarActionPerformed
+    private void btnCriarBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarBancoActionPerformed
+        if(RestauranteDAO.povoarBancoRestaurante()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Banco de dados Restaurante (padrão) inserido com sucesso!",
+                "Operação bem sucedida",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(
+                null,
+                "Banco de dados \"Restaurante\" não foi criado ainda\nou banco padrão já inserido",
+                "Operação não necessária",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCriarBancoActionPerformed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jBentrarActionPerformed
+    }//GEN-LAST:event_btnFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,18 +255,15 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField CampoSenha;
     private javax.swing.JTextField CampoUsuario;
-    private javax.swing.JButton jBentrar;
-    private javax.swing.JButton jBsair;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JButton btnCriarBanco;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;

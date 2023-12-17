@@ -27,10 +27,6 @@ public class Cardápio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -50,7 +46,6 @@ public class Cardápio extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Itens do cardápio");
@@ -225,12 +220,6 @@ public class Cardápio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBnovoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnovoItemActionPerformed
-        CadastroCard cd = new CadastroCard();
-        cd.setVisible(true);
-        this.dispose();        
-    }//GEN-LAST:event_jBnovoItemActionPerformed
-
     private void LPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LPrincipalMouseClicked
         Principal pri = new Principal ();
         pri.setVisible(true);
@@ -246,6 +235,12 @@ public class Cardápio extends javax.swing.JFrame {
     private void SairPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SairPedidosMouseClicked
         System.exit(0);
     }//GEN-LAST:event_SairPedidosMouseClicked
+
+    private void jBnovoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnovoItemActionPerformed
+        CadastroCard cd = new CadastroCard();
+        cd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBnovoItemActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         NovoPedido pn = new NovoPedido();
@@ -294,11 +289,7 @@ public class Cardápio extends javax.swing.JFrame {
     private javax.swing.JLabel SairPedidos;
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBnovoItem;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JPanel jPanel3;

@@ -27,9 +27,6 @@ public class Pedidos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuBar1 = new java.awt.MenuBar();
-        menu1 = new java.awt.Menu();
-        menu2 = new java.awt.Menu();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -63,12 +60,6 @@ public class Pedidos extends javax.swing.JFrame {
         jBCancelar = new javax.swing.JButton();
         jBnovoPedido1 = new javax.swing.JButton();
         jBFinalizar = new javax.swing.JButton();
-
-        menu1.setLabel("File");
-        menuBar1.add(menu1);
-
-        menu2.setLabel("Edit");
-        menuBar1.add(menu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Confira os pedidos!");
@@ -384,10 +375,6 @@ public class Pedidos extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SairPedidosMouseClicked
 
-    private void jLabel12ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jLabel12ComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel12ComponentAdded
-
     private void jTpedPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTpedPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTpedPesquisaActionPerformed
@@ -407,6 +394,10 @@ public class Pedidos extends javax.swing.JFrame {
     private void jBFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBFinalizarActionPerformed
+
+    private void jLabel12ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jLabel12ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel12ComponentAdded
 
     /**
      * @param args the command line arguments
@@ -477,8 +468,5 @@ public class Pedidos extends javax.swing.JFrame {
     private javax.swing.JTextField jTpedFinalizados;
     private javax.swing.JTextField jTpedPesquisa;
     private javax.swing.JTextField jTvalorTo;
-    private java.awt.Menu menu1;
-    private java.awt.Menu menu2;
-    private java.awt.MenuBar menuBar1;
     // End of variables declaration//GEN-END:variables
 }

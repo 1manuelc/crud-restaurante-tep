@@ -2,71 +2,71 @@ CREATE DATABASE Restaurante;
 USE Restaurante;
 
 CREATE TABLE tbFuncionario(
-	IdFun int(2) not null auto_increment,
-  Email varchar(50) not null,
-  Senha varchar(8) not null,
-	Nome varchar(50) not null,
-	CPF varchar(14) not null,
-	Endereco varchar(150) not null,
-	Telefone varchar(14) not null,
+    IdFun int(2) not null auto_increment,
+    Email varchar(50) not null,
+    Senha varchar(8) not null,
+    Nome varchar(50) not null,
+    CPF varchar(14) not null,
+    Endereco varchar(150) not null,
+    Telefone varchar(14) not null,
 
-	primary key(IdFun)
+    primary key(IdFun)
 );
 
 CREATE TABLE tbMesa(
-	idMesa int(2) not null auto_increment,
-	NumeroMesa int(3) not null,
-	Capacidade int(2) not null,
-	Ativa int(1) not null,
+    idMesa int(2) not null auto_increment,
+    NumeroMesa int(3) not null,
+    Capacidade int(2) not null,
+    Ativa int(1) not null,
 
-	primary key (idMesa)
+    primary key (idMesa)
 );
 
 CREATE TABLE tbPedidos(
-	IdPedido int(5) not null auto_increment,
-	DataPedido date not null,
-	IdFun int(5) not null,
-	IdMesa int(5) not null,
-  Ativo int(1) not null,
+    IdPedido int(5) not null auto_increment,
+    DataPedido date not null,
+    IdFun int(5) not null,
+    IdMesa int(5) not null,
+    Ativo int(1) not null,
 
-	foreign key (IdFun) references tbFuncionario(IdFun),
-	foreign key (IdMesa) references tbMesa(idMesa),
+    foreign key (IdFun) references tbFuncionario(IdFun),
+    foreign key (IdMesa) references tbMesa(idMesa),
 
-	primary key (IdPedido)
+    primary key (IdPedido)
 );
 
 CREATE TABLE tbCategoria(
-	IdCategoria int(2) not null auto_increment,
-	Descricao varchar(25) not null,
+    IdCategoria int(2) not null auto_increment,
+    Descricao varchar(25) not null,
 
-	primary key (IdCategoria)
+    primary key (IdCategoria)
 );
 
 CREATE TABLE tbCardapio(
-	IdItemCardapio int(3) not null auto_increment,
-	IdCategoria int(5) not null,
-	Nome varchar(100) not null,
-	Descricao varchar(150) not null,
-	Preco decimal(10,2) not null,
-	Ativo int(1) not null,
+    IdItemCardapio int(3) not null auto_increment,
+    IdCategoria int(5) not null,
+    Nome varchar(100) not null,
+    Descricao varchar(150) not null,
+    Preco decimal(10,2) not null,
+    Ativo int(1) not null,
 
-	foreign key(IdCategoria) references tbCategoria(IdCategoria),
+    foreign key(IdCategoria) references tbCategoria(IdCategoria),
 
-	primary key (IdItemCardapio)
+    primary key (IdItemCardapio)
 );
 
 CREATE TABLE tbDetalhesPed(
-	IdDetalhesPed int(5) not null auto_increment,
-	IdPedido int(5) not null,
-	IdItemCardapio int(5) not null,
-	Quantidade int not null,
-	Total decimal(10,2) not null,
-	Desconto decimal(10,2) not null,
+    IdDetalhesPed int(5) not null auto_increment,
+    IdPedido int(5) not null,
+    IdItemCardapio int(5) not null,
+    Quantidade int not null,
+    Total decimal(10,2) not null,
+    Desconto decimal(10,2) not null,
 
-	foreign key (IdPedido) references tbPedidos(IdPedido),
-	foreign key (IdItemCardapio) references tbCardapio(idItemCardapio),
-
-	primary key (IdDetalhesPed)
+    foreign key (IdPedido) references tbPedidos(IdPedido),
+    foreign key (IdItemCardapio) references tbCardapio(idItemCardapio),
+    
+    primary key (IdDetalhesPed)
 );
 
 
@@ -185,4 +185,9 @@ VALUES
 (2,             2,          1),
 (3,             8,          1),
 (4,             4,          1),
-(5,             2,          1)
+(5,             2,          1);
+
+INSERT INTO tbFuncionario
+(Email,                 Senha,      Nome,                       CPF,                Endereco,                                       Telefone)
+VALUES
+('gerente@ginefood.com','12345678', 'Jorge Djavan Faglioni',    '000.000.000-00',   'Rua Terra do Nunca, Maravilha, 21, 00000-000', '(00)90000-0000');

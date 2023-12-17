@@ -1,28 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.restaurante.tep.view;
 
-import java.text.DateFormat;
-import java.util.Date;
-
-/**
- *
- * @author User
- */
 public class Principal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Principal
-     */
     public Principal() {
         initComponents();
-        Date data= new Date();		
-	System.out.println(data);//imprimira: Mon Mar 17 21:13:42 BRT 2008
-	DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
-	System.out.println(formatador.format(data)); // imprimirá: 17/03/08
     }
    
     /**
@@ -34,10 +14,6 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jBpesquisarFun = new javax.swing.JButton();
@@ -62,15 +38,6 @@ public class Principal extends javax.swing.JFrame {
         jSobre = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-
-        jMenu6.setText("File");
-        jMenuBar2.add(jMenu6);
-
-        jMenu7.setText("Edit");
-        jMenuBar2.add(jMenu7);
-
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Restaurante GineFood");
@@ -373,14 +340,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jBpesquisarFun;
     private javax.swing.JMenu jCadCardapio;
     private javax.swing.JMenuItem jCadFuncionario;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
@@ -393,16 +356,4 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jSobre;
     private javax.swing.JLabel labelImagensCarrossel;
     // End of variables declaration//GEN-END:variables
-
-    
-    
-    public void Data(){
-        initComponents();
-        
-        Date data = new Date();		
-		
-	DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
-        Data.setText(String.valueOf(formatador.format(data)));
-                
-    }
 }
