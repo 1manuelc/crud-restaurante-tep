@@ -10,6 +10,7 @@ import com.restaurante.tep.model.Funcionario;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -22,8 +23,27 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
      */
     public FuncionarioPesquisa() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFuncionario.getModel();
+        tabelaFuncionario.setRowSorter(new TableRowSorter(modelo));
     }
 
+    
+    public void preencherTabelaFuncionarios() {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFuncionario.getModel();
+        modelo.setNumRows(0);
+        
+        for(Funcionario f : FuncionarioDAO.obterListaFuncionarios()) {
+            modelo.addRow(new Object[] {
+                f.getIdFun(),
+                f.getEmail(),
+                f.getNome(),
+                f.getCpf(),
+                f.getEndereco(),
+                f.getTelefone()
+            });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,14 +53,6 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel11 = new javax.swing.JPanel();
-        Principalpedidos = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        SairPedidos = new javax.swing.JLabel();
-        jSeparator13 = new javax.swing.JSeparator();
-        jSeparator14 = new javax.swing.JSeparator();
-        jSeparator15 = new javax.swing.JSeparator();
         jPanel12 = new javax.swing.JPanel();
         LPrincipal = new javax.swing.JLabel();
         LPedidos = new javax.swing.JLabel();
@@ -49,30 +61,16 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
+        txtPesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableFuncionario = new javax.swing.JTable();
-        jBnovoFuncionario = new javax.swing.JButton();
-
-        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Principalpedidos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Principalpedidos.setForeground(new java.awt.Color(255, 255, 255));
-        Principalpedidos.setText("Principal");
-        Principalpedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Principalpedidos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PrincipalpedidosMouseClicked(evt);
-            }
-        });
-        
+        tabelaFuncionario = new javax.swing.JTable();
+        btnNovoFuncionario = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pesquise os funcionários do GineFood");
@@ -125,21 +123,10 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
         getContentPane().add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 450));
 
         jPanel3.setBackground(new java.awt.Color(228, 77, 38));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(292, 292, 292))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/GineFoodSmall.png"))); // NOI18N
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 0, 420, 60));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 740, 60));
 
@@ -155,15 +142,15 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
         jLabel32.setText("Lista de funcionários");
         jPanel7.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icons8-pesquisar-100.png"))); // NOI18N
-        jButton5.setToolTipText("Pesquisar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icons8-pesquisar-100.png"))); // NOI18N
+        btnPesquisar.setToolTipText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
-        jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -171,17 +158,28 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
                 "Código", "Email", "Nome", "CPF", "Endereço", "Telefone"
             }
         ));
-        jTableFuncionario.setToolTipText("");
-        jScrollPane1.setViewportView(jTableFuncionario);
+        tabelaFuncionario.setToolTipText("");
+        jScrollPane1.setViewportView(tabelaFuncionario);
 
-        jBnovoFuncionario.setBackground(new java.awt.Color(51, 102, 255));
-        jBnovoFuncionario.setForeground(new java.awt.Color(255, 255, 255));
-        jBnovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
-        jBnovoFuncionario.setText("Novo funcionário");
-        jBnovoFuncionario.setToolTipText("Realizar novo pedido");
-        jBnovoFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        btnNovoFuncionario.setBackground(new java.awt.Color(51, 102, 255));
+        btnNovoFuncionario.setForeground(new java.awt.Color(255, 255, 255));
+        btnNovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
+        btnNovoFuncionario.setText("Novo funcionário");
+        btnNovoFuncionario.setToolTipText("Realizar novo pedido");
+        btnNovoFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBnovoFuncionarioActionPerformed(evt);
+                btnNovoFuncionarioActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setBackground(new java.awt.Color(51, 102, 255));
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/user_green.png"))); // NOI18N
+        btnAtualizar.setText("Atualizar funcionários");
+        btnAtualizar.setToolTipText("Realizar novo pedido");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -193,10 +191,13 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBnovoFuncionario)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(btnNovoFuncionario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAtualizar))
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -208,10 +209,12 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBnovoFuncionario)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovoFuncionario)
+                    .addComponent(btnAtualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(120, Short.MAX_VALUE))
@@ -229,15 +232,32 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_PrincipalpedidosMouseClicked
 
+    private void btnNovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoFuncionarioActionPerformed
+        new Funcionarios().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnNovoFuncionarioActionPerformed
 
-
-    private void jBnovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnovoFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBnovoFuncionarioActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        String pesquisaAtual = txtPesquisa.getText();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFuncionario.getModel();
+        modelo.setNumRows(0);
+        
+        for(Funcionario f : FuncionarioDAO.obterListaFuncionarios()) {
+            if(     f.getNome().toLowerCase().contains(pesquisaAtual) 
+                    || f.getNome().toUpperCase().contains(pesquisaAtual)
+                    || f.getNome().contains(pesquisaAtual)) {
+                modelo.addRow(new Object[] {
+                    f.getIdFun(),
+                    f.getEmail(),
+                    f.getNome(),
+                    f.getCpf(),
+                    f.getEndereco(),
+                    f.getTelefone()
+                });
+            }
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void LPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LPrincipalMouseClicked
         Principal pri = new Principal ();
@@ -254,6 +274,10 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
     private void SairPedidos2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SairPedidos2MouseClicked
         System.exit(0);
     }//GEN-LAST:event_SairPedidos2MouseClicked
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        preencherTabelaFuncionarios();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,28 +317,21 @@ public class FuncionarioPesquisa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LPedidos;
     private javax.swing.JLabel LPrincipal;
-    private javax.swing.JLabel Principalpedidos;
-    private javax.swing.JLabel SairPedidos;
     private javax.swing.JLabel SairPedidos2;
-    private javax.swing.JButton jBnovoFuncionario;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel23;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnNovoFuncionario;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator13;
-    private javax.swing.JSeparator jSeparator14;
-    private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTableFuncionario;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tabelaFuncionario;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }

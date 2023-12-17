@@ -19,12 +19,12 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-          Date data= new Date();		
-		System.out.println(data);//imprimira: Mon Mar 17 21:13:42 BRT 2008
-		DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
-		System.out.println(formatador.format(data)); // imprimirá: 17/03/08
+        Date data= new Date();		
+	System.out.println(data);//imprimira: Mon Mar 17 21:13:42 BRT 2008
+	DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
+	System.out.println(formatador.format(data)); // imprimirá: 17/03/08
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +44,6 @@ public class Principal extends javax.swing.JFrame {
         jBcardapio = new javax.swing.JButton();
         jBnovoPedido = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         Data = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         LPrincipal = new javax.swing.JLabel();
@@ -53,7 +52,8 @@ public class Principal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        labelImagensCarrossel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jCadCardapio = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -119,9 +119,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(323, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(60, 60, 60)
+                .addContainerGap(307, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBnovoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBcardapio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,12 +142,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 80));
-
-        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel6.setText("GineFood");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 200, 40));
         jPanel1.add(Data, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 420, 30));
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
@@ -195,10 +189,15 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 480));
 
-        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Controle de pedidos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelImagensCarrossel.setBackground(new java.awt.Color(255, 255, 255));
+        labelImagensCarrossel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/head-image.png"))); // NOI18N
+        labelImagensCarrossel.setText("jLabel3");
+        jPanel3.add(labelImagensCarrossel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 540, 410));
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
         jMenuBar1.setAlignmentX(1.5F);
@@ -328,7 +327,7 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+   
     /**
      * @param args the command line arguments
      */
@@ -355,7 +354,7 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -375,9 +374,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jCadCardapio;
     private javax.swing.JMenuItem jCadFuncionario;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -388,22 +385,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JMenuItem jSobre;
+    private javax.swing.JLabel labelImagensCarrossel;
     // End of variables declaration//GEN-END:variables
 
     
     
     public void Data(){
-         initComponents();
+        initComponents();
         
-          Date data= new Date();		
+        Date data = new Date();		
 		
-		DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
-           Data.setText(String.valueOf(formatador.format(data)));
+	DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
+        Data.setText(String.valueOf(formatador.format(data)));
                 
     }
 }
