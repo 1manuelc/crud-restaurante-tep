@@ -276,8 +276,8 @@ public class ConsultasSQL {
         "(5,             2,          1);\n" +
         "\n" +
         "INSERT INTO tbFuncionario\n" +
-        "(Email,                 Senha,      Nome,                       CPF,                Endereco,                                       Telefone)\n" +
+        "(Email,                 Senha,      Nome,          CPF,                Endereco,                                       Telefone)\n" +
         "VALUES\n" +
-        "('gerente@ginefood.com','12345678', 'Jorge Djavan Faglioni',    '000.000.000-00',   'Rua Terra do Nunca, Maravilha, 21, 00000-000', '(00)90000-0000');"
+        "('gerente@ginefood.com','12345678', 'Gerente',    '000.000.000-00',   'Rua Terra do Nunca, Maravilha, 21, 00000-000', '(00)90000-0000');"
     };
 }

@@ -59,7 +59,7 @@ CREATE TABLE tbDetalhesPed(
     IdPedido int(5) not null,
     IdItemCardapio int(5) not null,
     Quantidade int not null,
-    Total decimal(10,2) not null,
+    Preco decimal(10,2) not null,
 
     foreign key (IdPedido) references tbPedidos(IdPedido),
     foreign key (IdItemCardapio) references tbCardapio(idItemCardapio),
@@ -186,6 +186,6 @@ VALUES
 (5,             2,          1);
 
 INSERT INTO tbFuncionario
-(Email,                 Senha,      Nome,                       CPF,                Endereco,                                       Telefone)
+(Email,                 Senha,      Nome,           CPF,                Endereco,                                       Telefone)
 VALUES
-('gerente@ginefood.com','12345678', 'Jorge Djavan Faglioni',    '000.000.000-00',   'Rua Terra do Nunca, Maravilha, 21, 00000-000', '(00)90000-0000');
+('gerente@ginefood.com','12345678', 'Gerente',      '000.000.000-00',   'Rua Terra do Nunca, Maravilha, 21, 00000-000', '(00)90000-0000');
