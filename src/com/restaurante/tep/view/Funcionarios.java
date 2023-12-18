@@ -141,7 +141,7 @@ public class Funcionarios extends javax.swing.JFrame {
         jPanel5.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, -1));
         jPanel5.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 152, 130, 40));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 450));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 440));
 
         jPanel3.setBackground(new java.awt.Color(228, 77, 38));
 
@@ -318,13 +318,13 @@ public class Funcionarios extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 12, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,6 +388,8 @@ public class Funcionarios extends javax.swing.JFrame {
                 "Funcionário " + txtNome.getText() + " cadastrado com sucesso",
                 "Relatório de cadastro",
                 JOptionPane.INFORMATION_MESSAGE);
+            preencherTabelaFuncionarios();
+            limparCampos();
         } else {
             JOptionPane.showMessageDialog(
                 null,
@@ -413,7 +415,7 @@ public class Funcionarios extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SairPedidosMouseClicked
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    private void limparCampos() {
         txtNome.setText("");
         txtEmail.setText("");
         txtCpf.setText("");
@@ -422,6 +424,10 @@ public class Funcionarios extends javax.swing.JFrame {
         txtSenha.setText("");
         txtDicaId.setText("");
         txtIdAtual.setText("");
+    }
+    
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -433,6 +439,8 @@ public class Funcionarios extends javax.swing.JFrame {
                     "Funcionário de id " + idFunAtual + " excluído com sucesso",
                     "Relatório de cadastro",
                     JOptionPane.INFORMATION_MESSAGE);
+                preencherTabelaFuncionarios();
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(
                     null,
@@ -440,8 +448,6 @@ public class Funcionarios extends javax.swing.JFrame {
                     "Relatório de cadastro",
                     JOptionPane.INFORMATION_MESSAGE);
             }
-            
-            
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -461,16 +467,18 @@ public class Funcionarios extends javax.swing.JFrame {
             
             if(FuncionarioDAO.atualizarFuncionarioPorId(idFunAtual, funNovo)) {
                 JOptionPane.showMessageDialog(
-                null,
-                "Funcionário " + funNovo.getNome() + " atualizado com sucesso",
-                "Relatório de cadastro",
-                JOptionPane.INFORMATION_MESSAGE);
+                    null,
+                    "Funcionário " + funNovo.getNome() + " atualizado com sucesso",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
+                preencherTabelaFuncionarios();
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(
-                null,
-                "Erro ao atualizar funcionário",
-                "Relatório de cadastro",
-                JOptionPane.INFORMATION_MESSAGE);
+                    null,
+                    "Erro ao atualizar funcionário",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnEditarActionPerformed

@@ -5,6 +5,12 @@
  */
 package com.restaurante.tep.view;
 
+import com.restaurante.tep.controller.dao.CardapioDAO;
+import com.restaurante.tep.model.Cardapio;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author User
@@ -16,6 +22,24 @@ public class CadastroCard extends javax.swing.JFrame {
      */
     public CadastroCard() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCardapioItem.getModel();
+        tabelaCardapioItem.setRowSorter(new TableRowSorter(modelo));
+    }
+    
+    public void preencherTabelaCardapio() {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCardapioItem.getModel();
+        modelo.setNumRows(0);
+        
+        for(Cardapio c : CardapioDAO.obterListaCardapio()) {
+            modelo.addRow(new Object[] {
+                c.getIdItemCardapio(),
+                c.getNome(),
+                c.getDescricao(),
+                c.getPreco(),
+                c.getIdCategoria(),
+                c.getAtivo()
+            });
+        }
     }
 
     /**
@@ -28,9 +52,6 @@ public class CadastroCard extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jBsalvarItens = new javax.swing.JButton();
-        jBLimparItens = new javax.swing.JButton();
-        jBcancelar = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         Principalpedidos = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -45,52 +66,37 @@ public class CadastroCard extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        jTnome = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        jCcategoria = new javax.swing.JComboBox<>();
+        comboBoxCategoria = new javax.swing.JComboBox<>();
         jLabel35 = new javax.swing.JLabel();
-        jTpreco = new javax.swing.JTextField();
+        txtPreco = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jTdescricao = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        simDisponivel = new javax.swing.JRadioButton();
+        naoDisponivel = new javax.swing.JRadioButton();
+        txtIdAtual = new javax.swing.JLabel();
+        txtDicaId = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableItens = new javax.swing.JTable();
+        tabelaCardapioItem = new javax.swing.JTable();
+        btnAtualizaCadastroCard = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastre mais um item no cárdapio!!");
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jBsalvarItens.setBackground(new java.awt.Color(51, 153, 0));
-        jBsalvarItens.setForeground(new java.awt.Color(255, 255, 255));
-        jBsalvarItens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/bullet_disk.png"))); // NOI18N
-        jBsalvarItens.setText("Salvar");
-        jBsalvarItens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBsalvarItensActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBsalvarItens, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, 30));
-
-        jBLimparItens.setBackground(new java.awt.Color(0, 102, 204));
-        jBLimparItens.setForeground(new java.awt.Color(255, 255, 255));
-        jBLimparItens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/picture_delete.png"))); // NOI18N
-        jBLimparItens.setText("Limpar");
-        jBLimparItens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBLimparItensActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBLimparItens, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, 30));
-
-        jBcancelar.setBackground(new java.awt.Color(255, 0, 51));
-        jBcancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jBcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/cancel.png"))); // NOI18N
-        jBcancelar.setText("Cancelar");
-        getContentPane().add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, -1, 30));
 
         jPanel11.setBackground(new java.awt.Color(51, 51, 51));
         jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -165,53 +171,60 @@ public class CadastroCard extends javax.swing.JFrame {
         jLabel34.setText("Cadastrar item do cardápio");
         jPanel7.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
 
-        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 570, -1));
+        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel32.setText("Nome");
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 27, 60, -1));
-        jPanel1.add(jTnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 380, -1));
+        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 27, 60, 20));
+        jPanel1.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 380, -1));
 
         jLabel33.setText("Categoria");
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, -1, -1));
+        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, 30));
 
-        jCcategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jCcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 109, -1));
+        comboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Executivo", "Prato Principal", "Sobremesa", "Suco", "Bebida Alcoólica", "Refrigerante ou água" }));
+        jPanel1.add(comboBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 140, -1));
 
-        jLabel35.setText("Preço");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 121, -1, -1));
+        jLabel35.setText("Preço:");
+        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
 
-        jTpreco.addActionListener(new java.awt.event.ActionListener() {
+        txtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTprecoActionPerformed(evt);
+                txtPrecoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTpreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 143, 41, -1));
+        jPanel1.add(txtPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 70, 30));
 
         jLabel36.setBackground(new java.awt.Color(204, 204, 204));
         jLabel36.setText("R$");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 141, -1, 25));
+        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 30, 50));
 
         jLabel37.setText("Descrição");
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 100, -1));
-        jPanel1.add(jTdescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 95, 550, -1));
+        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 100, 20));
+        jPanel1.add(txtDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 540, -1));
 
         jLabel38.setText("Disponível");
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 121, -1, -1));
+        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 80, 40));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Sim");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 142, -1, -1));
+        buttonGroup1.add(simDisponivel);
+        simDisponivel.setText("Sim");
+        jPanel1.add(simDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, 20));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Não");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 142, -1, -1));
+        buttonGroup1.add(naoDisponivel);
+        naoDisponivel.setText("Não");
+        jPanel1.add(naoDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, 20));
+
+        txtIdAtual.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtIdAtual.setForeground(new java.awt.Color(228, 77, 38));
+        jPanel1.add(txtIdAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 140, 60));
+
+        txtDicaId.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jPanel1.add(txtDicaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 150, 50));
 
         jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 580, 190));
 
-        jTableItens.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCardapioItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -222,24 +235,119 @@ public class CadastroCard extends javax.swing.JFrame {
                 "Código", "Nome", "Descrição", "Preço", "Categoria", "Disponível"
             }
         ));
-        jTableItens.setToolTipText("");
-        jScrollPane1.setViewportView(jTableItens);
+        tabelaCardapioItem.setToolTipText("");
+        tabelaCardapioItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaCardapioItemMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaCardapioItem);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 580, 110));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 600, 440));
+        btnAtualizaCadastroCard.setBackground(new java.awt.Color(0, 102, 204));
+        btnAtualizaCadastroCard.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizaCadastroCard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/picture_delete.png"))); // NOI18N
+        btnAtualizaCadastroCard.setText("Atualizar Cardápio");
+        btnAtualizaCadastroCard.setActionCommand("Atualizar");
+        btnAtualizaCadastroCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizaCadastroCardActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnAtualizaCadastroCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 30));
+
+        btnLimpar.setBackground(new java.awt.Color(0, 102, 204));
+        btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/picture_delete.png"))); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, 30));
+
+        btnSalvar.setBackground(new java.awt.Color(51, 153, 0));
+        btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/bullet_disk.png"))); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, 30));
+
+        btnExcluir.setBackground(new java.awt.Color(255, 0, 51));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/cancel.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, 30));
+
+        btnEditar.setBackground(new java.awt.Color(255, 102, 0));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/application_edit.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, -1, 30));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 600, 450));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTprecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTprecoActionPerformed
+    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTprecoActionPerformed
+    }//GEN-LAST:event_txtPrecoActionPerformed
 
-    private void jBsalvarItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarItensActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBsalvarItensActionPerformed
+    private int obterIdCategoriaPorString(String nomeCategoria) {
+        if("Entrada".equals(nomeCategoria)) return 1;
+        else if("Executivo".equals(nomeCategoria)) return 2;
+        else if("Prato Principal".equals(nomeCategoria)) return 3;
+        else if("Sobremesa".equals(nomeCategoria)) return 4;
+        else if("Suco".equals(nomeCategoria)) return 5;
+        else if("Bebida Alcoólica".equals(nomeCategoria)) return 6;
+        return 7;
+    }
+    
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Cardapio cardNovo = new Cardapio();
+        
+        cardNovo.setIdCategoria(
+            obterIdCategoriaPorString(comboBoxCategoria.getSelectedItem().toString())
+        );
+        cardNovo.setNome(txtNome.getText());
+        cardNovo.setDescricao(txtDescricao.getText());
+        cardNovo.setPreco(Double.parseDouble(txtPreco.getText()));
+        cardNovo.setAtivo(simDisponivel.isSelected()? 1 : 0);
+        
+        if(CardapioDAO.inserirCardapio(cardNovo)) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Cardapio " + txtNome.getText() + " cadastrado com sucesso",
+                "Relatório de cadastro",
+                JOptionPane.INFORMATION_MESSAGE);
+            preencherTabelaCardapio();
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(
+                null,
+                "Erro ao cadastrar funcionário!",
+                "Relatório de cadastro",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void PrincipalpedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrincipalpedidosMouseClicked
         Principal pri = new Principal ();
@@ -251,9 +359,88 @@ public class CadastroCard extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SairPedidosMouseClicked
 
-    private void jBLimparItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparItensActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBLimparItensActionPerformed
+    private void limparCampos() {
+        txtNome.setText("");
+        txtDescricao.setText("");
+        txtPreco.setText("");
+        comboBoxCategoria.setSelectedIndex(0);
+        buttonGroup1.clearSelection();
+        txtIdAtual.setText("");
+        txtDicaId.setText("");
+    }
+    
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        preencherTabelaCardapio();
+    }//GEN-LAST:event_formComponentShown
+
+    private void btnAtualizaCadastroCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizaCadastroCardActionPerformed
+        preencherTabelaCardapio();
+    }//GEN-LAST:event_btnAtualizaCadastroCardActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if(tabelaCardapioItem.getSelectedRow() != -1) {
+            Cardapio cardNovo = new Cardapio();
+            int idItemCardapio = Integer.parseInt(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 0).toString());
+
+            cardNovo.setIdCategoria(
+                    obterIdCategoriaPorString(comboBoxCategoria.getSelectedItem().toString())
+            );
+            cardNovo.setNome(txtNome.getText());
+            cardNovo.setDescricao(txtDescricao.getText());
+            cardNovo.setPreco(Double.parseDouble(txtPreco.getText()));
+            cardNovo.setAtivo(simDisponivel.isSelected()? 1 : 0);
+
+            if(CardapioDAO.atualizarCardapioPorId(idItemCardapio, cardNovo)) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Item " + cardNovo.getNome() + " atualizado com sucesso",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
+                preencherTabelaCardapio();
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Erro ao atualizar item",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tabelaCardapioItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCardapioItemMouseClicked
+        if(tabelaCardapioItem.getSelectedRow() != -1) {
+            txtNome.setText(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 1).toString());
+            txtDescricao.setText(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 2).toString());
+            txtPreco.setText(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 3).toString());
+            
+            comboBoxCategoria.setSelectedIndex(Integer.parseInt(
+                    tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 4).toString()) - 1
+            );
+            
+            int ativo = Integer.parseInt(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 5).toString());
+            if(ativo == 1) {
+                simDisponivel.setSelected(true);
+            } else {
+                naoDisponivel.setSelected(true);
+            }
+            txtDicaId.setText("Editando o item de id:");
+            txtIdAtual.setText(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 0).toString());
+        }
+    }//GEN-LAST:event_tabelaCardapioItemMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if(tabelaCardapioItem.getSelectedRow() != -1) {
+            int idCardAtual = Integer.parseInt(tabelaCardapioItem.getValueAt(tabelaCardapioItem.getSelectedRow(), 0).toString());
+            CardapioDAO.deletarCardapioPorId(idCardAtual);
+            preencherTabelaCardapio();
+            limparCampos();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,11 +480,13 @@ public class CadastroCard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Principalpedidos;
     private javax.swing.JLabel SairPedidos;
+    private javax.swing.JButton btnAtualizaCadastroCard;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jBLimparItens;
-    private javax.swing.JButton jBcancelar;
-    private javax.swing.JButton jBsalvarItens;
-    private javax.swing.JComboBox<String> jCcategoria;
+    private javax.swing.JComboBox<String> comboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel32;
@@ -312,15 +501,17 @@ public class CadastroCard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator15;
-    private javax.swing.JTable jTableItens;
-    private javax.swing.JTextField jTdescricao;
-    private javax.swing.JTextField jTnome;
-    private javax.swing.JTextField jTpreco;
+    private javax.swing.JRadioButton naoDisponivel;
+    private javax.swing.JRadioButton simDisponivel;
+    private javax.swing.JTable tabelaCardapioItem;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JLabel txtDicaId;
+    private javax.swing.JLabel txtIdAtual;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }

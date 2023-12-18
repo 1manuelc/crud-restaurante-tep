@@ -27,7 +27,6 @@ CREATE TABLE tbPedidos(
     DataPedido date not null,
     IdFun int(5) not null,
     IdMesa int(5) not null,
-    Ativo int(1) not null,
 
     foreign key (IdFun) references tbFuncionario(IdFun),
     foreign key (IdMesa) references tbMesa(idMesa),
@@ -61,7 +60,6 @@ CREATE TABLE tbDetalhesPed(
     IdItemCardapio int(5) not null,
     Quantidade int not null,
     Total decimal(10,2) not null,
-    Desconto decimal(10,2) not null,
 
     foreign key (IdPedido) references tbPedidos(IdPedido),
     foreign key (IdItemCardapio) references tbCardapio(idItemCardapio),

@@ -1,3 +1,10 @@
+# NetBeans build directories
+/nbproject/private/
+/build/
+/dist/
+/nbbuild/
+/.nb-gradle/
+
 # Compiled class file
 *.class
 

@@ -39,27 +39,18 @@ public class Pedidos extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        panelTotal = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTpedFinalizados = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jTvalorTo = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        txtValorTotalPedidos = new javax.swing.JLabel();
+        panelQtd = new javax.swing.JPanel();
         jTQtdeGeral = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jTpedCancelados = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTablePedidos = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jBpesquisarPed = new javax.swing.JButton();
-        jTpedPesquisa = new javax.swing.JTextField();
-        jBCancelar = new javax.swing.JButton();
-        jBnovoPedido1 = new javax.swing.JButton();
-        jBFinalizar = new javax.swing.JButton();
+        tabelaPedidos = new javax.swing.JTable();
+        btnExcluirPedido = new javax.swing.JButton();
+        btnNovoPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Confira os pedidos!");
@@ -141,69 +132,46 @@ public class Pedidos extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 60));
 
-        jPanel4.setBackground(new java.awt.Color(102, 204, 0));
+        panelTotal.setBackground(new java.awt.Color(102, 153, 255));
+        panelTotal.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        panelTotal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Finalizados");
-
-        jTpedFinalizados.setEditable(false);
-        jTpedFinalizados.setBackground(new java.awt.Color(102, 204, 0));
-        jTpedFinalizados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addComponent(jTpedFinalizados, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTpedFinalizados, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 140, 70));
-
-        jPanel6.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel6.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTvalorTo.setEditable(false);
-        jTvalorTo.setBackground(new java.awt.Color(102, 153, 255));
-        jTvalorTo.setForeground(new java.awt.Color(255, 255, 255));
-        jTvalorTo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTvalorTo.setText("R$");
-        jTvalorTo.setToolTipText("");
-        jTvalorTo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTvalorToActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jTvalorTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 40));
-
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText(" Valor total de pedidos");
-        jLabel12.addContainerListener(new java.awt.event.ContainerAdapter() {
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText(" Valor total de pedidos");
+        jLabel14.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jLabel12ComponentAdded(evt);
+                jLabel14ComponentAdded(evt);
             }
         });
-        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+        panelTotal.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 40));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 130, 70));
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("R$");
+        jLabel15.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jLabel15ComponentAdded(evt);
+            }
+        });
+        panelTotal.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 20, 30));
 
-        jPanel7.setBackground(new java.awt.Color(255, 153, 51));
+        txtValorTotalPedidos.setBackground(new java.awt.Color(255, 255, 255));
+        txtValorTotalPedidos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtValorTotalPedidos.setForeground(new java.awt.Color(255, 255, 255));
+        txtValorTotalPedidos.setText("Valor");
+        txtValorTotalPedidos.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                txtValorTotalPedidosComponentAdded(evt);
+            }
+        });
+        panelTotal.add(txtValorTotalPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 80, 30));
+
+        jPanel1.add(panelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 150, 70));
+
+        panelQtd.setBackground(new java.awt.Color(255, 153, 51));
 
         jTQtdeGeral.setEditable(false);
         jTQtdeGeral.setBackground(new java.awt.Color(255, 153, 51));
@@ -214,61 +182,44 @@ public class Pedidos extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Quantidade geral");
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Valor");
+        jLabel12.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jLabel12ComponentAdded(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelQtdLayout = new javax.swing.GroupLayout(panelQtd);
+        panelQtd.setLayout(panelQtdLayout);
+        panelQtdLayout.setHorizontalGroup(
+            panelQtdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelQtdLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTQtdeGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jTQtdeGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelQtdLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        panelQtdLayout.setVerticalGroup(
+            panelQtdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelQtdLayout.createSequentialGroup()
                 .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jTQtdeGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelQtdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTQtdeGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 130, 70));
+        jPanel1.add(panelQtd, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 120, 70));
 
-        jPanel8.setBackground(new java.awt.Color(255, 51, 51));
-
-        jTpedCancelados.setEditable(false);
-        jTpedCancelados.setBackground(new java.awt.Color(255, 51, 51));
-        jTpedCancelados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Cancelados");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTpedCancelados, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTpedCancelados, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 140, 70));
-
-        jTablePedidos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTablePedidos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaPedidos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tabelaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -284,73 +235,40 @@ public class Pedidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTablePedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTablePedidos);
+        tabelaPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tabelaPedidos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 600, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 580, 300));
 
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setText("Lista de pedidos");
-        jPanel10.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
-
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 600, 30));
-
-        jBpesquisarPed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icons8-pesquisar-100.png"))); // NOI18N
-        jBpesquisarPed.setToolTipText("Pesquisar pedido");
-        jPanel1.add(jBpesquisarPed, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 80, 30));
-
-        jTpedPesquisa.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluirPedido.setBackground(new java.awt.Color(51, 102, 255));
+        btnExcluirPedido.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluirPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/delete.png"))); // NOI18N
+        btnExcluirPedido.setText("Excuir pedido");
+        btnExcluirPedido.setToolTipText("Realizar novo pedido");
+        btnExcluirPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTpedPesquisaActionPerformed(evt);
+                btnExcluirPedidoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTpedPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 490, 30));
+        jPanel1.add(btnExcluirPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 280, 30));
 
-        jBCancelar.setBackground(new java.awt.Color(51, 102, 255));
-        jBCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/delete.png"))); // NOI18N
-        jBCancelar.setText("Cancelar");
-        jBCancelar.setToolTipText("Realizar novo pedido");
-        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnNovoPedido.setBackground(new java.awt.Color(51, 102, 255));
+        btnNovoPedido.setForeground(new java.awt.Color(255, 255, 255));
+        btnNovoPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
+        btnNovoPedido.setText("Novo Pedido");
+        btnNovoPedido.setToolTipText("Realizar novo pedido");
+        btnNovoPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCancelarActionPerformed(evt);
+                btnNovoPedidoActionPerformed(evt);
             }
         });
-        jPanel1.add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 110, -1));
-
-        jBnovoPedido1.setBackground(new java.awt.Color(51, 102, 255));
-        jBnovoPedido1.setForeground(new java.awt.Color(255, 255, 255));
-        jBnovoPedido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
-        jBnovoPedido1.setText("Novo Pedido");
-        jBnovoPedido1.setToolTipText("Realizar novo pedido");
-        jBnovoPedido1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBnovoPedido1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBnovoPedido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, -1, -1));
-
-        jBFinalizar.setBackground(new java.awt.Color(51, 102, 255));
-        jBFinalizar.setForeground(new java.awt.Color(255, 255, 255));
-        jBFinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/accept.png"))); // NOI18N
-        jBFinalizar.setText("Finalizar");
-        jBFinalizar.setToolTipText("Realizar novo pedido");
-        jBFinalizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBFinalizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 110, -1));
+        jPanel1.add(btnNovoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 280, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,10 +278,6 @@ public class Pedidos extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTvalorToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTvalorToActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTvalorToActionPerformed
 
     private void PrincipalpedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrincipalpedidosMouseClicked
          Principal pri = new Principal ();
@@ -375,29 +289,31 @@ public class Pedidos extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SairPedidosMouseClicked
 
-    private void jTpedPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTpedPesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTpedPesquisaActionPerformed
+    private void btnExcluirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPedidoActionPerformed
 
-    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        NovoPedido pn = new NovoPedido();
-        pn.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jBCancelarActionPerformed
+    }//GEN-LAST:event_btnExcluirPedidoActionPerformed
 
-    private void jBnovoPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnovoPedido1ActionPerformed
+    private void btnNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoPedidoActionPerformed
         NovoPedido np = new NovoPedido();
         np.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jBnovoPedido1ActionPerformed
-
-    private void jBFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBFinalizarActionPerformed
+    }//GEN-LAST:event_btnNovoPedidoActionPerformed
 
     private void jLabel12ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jLabel12ComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12ComponentAdded
+
+    private void jLabel14ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jLabel14ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel14ComponentAdded
+
+    private void jLabel15ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jLabel15ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel15ComponentAdded
+
+    private void txtValorTotalPedidosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_txtValorTotalPedidosComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorTotalPedidosComponentAdded
 
     /**
      * @param args the command line arguments
@@ -437,36 +353,27 @@ public class Pedidos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Principalpedidos;
     private javax.swing.JLabel SairPedidos;
-    private javax.swing.JButton jBCancelar;
-    private javax.swing.JButton jBFinalizar;
-    private javax.swing.JButton jBnovoPedido1;
-    private javax.swing.JButton jBpesquisarPed;
+    private javax.swing.JButton btnExcluirPedido;
+    private javax.swing.JButton btnNovoPedido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTQtdeGeral;
-    private javax.swing.JTable jTablePedidos;
-    private javax.swing.JTextField jTpedCancelados;
-    private javax.swing.JTextField jTpedFinalizados;
-    private javax.swing.JTextField jTpedPesquisa;
-    private javax.swing.JTextField jTvalorTo;
+    private javax.swing.JPanel panelQtd;
+    private javax.swing.JPanel panelTotal;
+    private javax.swing.JTable tabelaPedidos;
+    private javax.swing.JLabel txtValorTotalPedidos;
     // End of variables declaration//GEN-END:variables
 }

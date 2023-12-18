@@ -33,7 +33,6 @@ public class AjudaSobre extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jBAjuda = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -60,8 +59,9 @@ public class AjudaSobre extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icons8-central-de-ajuda-100.png"))); // NOI18N
         jLabel2.setText("Central de ajuda");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 270, -1));
 
         jBAjuda.setBackground(new java.awt.Color(255, 51, 0));
         jBAjuda.setForeground(new java.awt.Color(255, 255, 255));
@@ -71,10 +71,7 @@ public class AjudaSobre extends javax.swing.JFrame {
                 jBAjudaActionPerformed(evt);
             }
         });
-        jPanel1.add(jBAjuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icons8-central-de-ajuda-100.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 118, 87));
+        jPanel1.add(jBAjuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 325, -1, 40));
 
         jLabel5.setText("o funcionário cadastrado poderá realizar operações de inserir um novo pedido, alterar, excluir e realizar  ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 590, -1));
@@ -92,10 +89,10 @@ public class AjudaSobre extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 510, 30));
 
         jLabel11.setText("Para mais dúvidas clique no botão abaixo e nos envie um email!");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 510, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 370, 30));
 
         jLabel12.setText("ginesoft@gmail.com");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 450));
 
@@ -242,7 +239,6 @@ public class AjudaSobre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

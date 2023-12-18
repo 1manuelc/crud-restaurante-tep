@@ -26,6 +26,28 @@ public class ConsultasSQL {
     public static final String VERIFICAR_EXISTENCIA_INSERCOES =
         "SHOW TABLES LIKE 'tbCardapio'";
     
+    public static final String INSERIR_CARDAPIO =
+            "INSERT INTO tbCardapio\n" +
+            "       (IdCategoria,   Nome,   Descricao,    Preco,   Ativo)\n" +
+            "VALUES (?,             ?,      ?,      ?,      ?);";
+    
+    public static final String OBTER_CARDAPIO = "SELECT * FROM tbCardapio";
+    
+    public static final String OBTER_CARDAPIO_POR_ID =
+            "SELECT * FROM tbCardapio\n" +
+            "WHERE IdItemCardapio = ?";
+    
+    public static final String DELETAR_CARDAPIO_POR_ID =
+            "DELETE FROM tbCardapio\n" +
+            "WHERE IdItemCardapio = ?";
+    
+    public static final String ATUALIZAR_CARDAPIO_POR_ID =
+            "UPDATE tbCardapio\n" +
+            "SET\n" +
+                "IdCategoria = ?, Nome = ?, Descricao = ?,\n" +
+                "Preco = ?, Ativo = ?\n" +
+            "WHERE IdItemCardapio = ?;";
+    
     public static final String[] POVOAR_BANCO_PADRAO =
     {
         "CREATE TABLE tbFuncionario(\n" +
@@ -57,7 +79,6 @@ public class ConsultasSQL {
         "    DataPedido date not null,\n" +
         "    IdFun int(5) not null,\n" +
         "    IdMesa int(5) not null,\n" +
-        "    Ativo int(1) not null,\n" +
         "\n" +
         "    foreign key (IdFun) references tbFuncionario(IdFun),\n" +
         "    foreign key (IdMesa) references tbMesa(idMesa),\n" +
@@ -97,7 +118,6 @@ public class ConsultasSQL {
         "    IdItemCardapio int(5) not null,\n" +
         "    Quantidade int not null,\n" +
         "    Total decimal(10,2) not null,\n" +
-        "    Desconto decimal(10,2) not null,\n" +
         "\n" +
         "    foreign key (IdPedido) references tbPedidos(IdPedido),\n" +
         "    foreign key (IdItemCardapio) references tbCardapio(idItemCardapio),\n" +

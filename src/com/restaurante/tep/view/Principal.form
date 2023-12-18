@@ -12,18 +12,18 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jCadCardapio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastros"/>
+            <Property name="text" type="java.lang.String" value="Gerenciamento"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+B"/>
+                  <KeyStroke key="Ctrl+C"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/restaurante/tep/view/images/report_edit.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cadastro de card&#xe1;pio"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar Card&#xe1;pio"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -37,7 +37,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/restaurante/tep/view/images/user_green.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cadastro de funcion&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar Funcion&#xe1;rios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCadFuncionarioActionPerformed"/>

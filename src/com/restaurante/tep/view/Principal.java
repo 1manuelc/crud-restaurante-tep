@@ -169,11 +169,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
         jMenuBar1.setAlignmentX(1.5F);
 
-        jCadCardapio.setText("Cadastros");
+        jCadCardapio.setText("Gerenciamento");
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/report_edit.png"))); // NOI18N
-        jMenuItem3.setText("Cadastro de cardápio");
+        jMenuItem3.setText("Gerenciar Cardápio");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -183,7 +183,7 @@ public class Principal extends javax.swing.JFrame {
 
         jCadFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jCadFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/user_green.png"))); // NOI18N
-        jCadFuncionario.setText("Cadastro de funcionário");
+        jCadFuncionario.setText("Gerenciar Funcionários");
         jCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCadFuncionarioActionPerformed(evt);
@@ -245,8 +245,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBnovoPedidoActionPerformed
 
     private void jBcardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcardapioActionPerformed
-        Cardapio card = new Cardapio();
-        card.setVisible(true);
+        new Cardapios().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBcardapioActionPerformed
 
