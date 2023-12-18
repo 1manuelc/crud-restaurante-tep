@@ -23,6 +23,37 @@ public class ConsultasSQL {
             "DELETE FROM tbFuncionario\n" +
             "WHERE IdFun = ?";
     
+    public static final String INSERIR_DETALHES_PEDIDO =
+            "INSERT INTO tbDetalhesPed\n" +
+            "       (IdPedido,  IdItemCardapio, Quantidade, Preco)\n" +
+            "VALUES (?,         ?,              ?,          ?);";
+    
+    public static final String OBTER_DETALHES_PEDIDO = "SELECT * FROM tbDetalhesPed";
+    
+    public static final String OBTER_DETALHES_PEDIDO_POR_ID =
+            "SELECT * FROM tbDetalhesPed\n" +
+            "WHERE IdDetalhesPed = ?";
+    
+    public static final String DELETAR_DETALHES_PEDIDO_POR_ID =
+            "DELETE FROM tbDetalhesPed\n" +
+            "WHERE IdDetalhesPed = ?";
+    
+    public static final String INSERIR_PEDIDO =
+            "INSERT INTO tbPedidos\n" +
+            "       (DataPedido,    IdFun,  IdMesa)\n" +
+            "VALUES (?,             ?,      ?);";
+    
+    public static final String OBTER_PEDIDOS = "SELECT * FROM tbPedidos";
+    
+    public static final String DELETAR_PEDIDO_POR_ID =
+            "DELETE FROM tbPedidos\n" +
+            "WHERE IdPedido = ?";
+    
+    public static final String OBTER_ULTIMO_PEDIDO = 
+            "SELECT * FROM tbPedidos\n" +
+            "ORDER BY DataPedido DESC\n" +
+            "LIMIT 1;";
+    
     public static final String VERIFICAR_EXISTENCIA_INSERCOES =
         "SHOW TABLES LIKE 'tbCardapio'";
     
@@ -117,7 +148,7 @@ public class ConsultasSQL {
         "    IdPedido int(5) not null,\n" +
         "    IdItemCardapio int(5) not null,\n" +
         "    Quantidade int not null,\n" +
-        "    Total decimal(10,2) not null,\n" +
+        "    Preco decimal(10,2) not null,\n" +
         "\n" +
         "    foreign key (IdPedido) references tbPedidos(IdPedido),\n" +
         "    foreign key (IdItemCardapio) references tbCardapio(idItemCardapio),\n" +

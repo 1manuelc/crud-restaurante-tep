@@ -5,17 +5,80 @@
  */
 package com.restaurante.tep.view;
 
+import com.restaurante.tep.controller.dao.CardapioDAO;
+import com.restaurante.tep.controller.dao.DetalhesPedidoDAO;
+import com.restaurante.tep.controller.dao.FuncionarioDAO;
+import com.restaurante.tep.controller.dao.PedidoDAO;
+import com.restaurante.tep.model.Cardapio;
+import com.restaurante.tep.model.DetalhesPedido;
+import com.restaurante.tep.model.Funcionario;
+import com.restaurante.tep.model.Pedido;
+import com.restaurante.tep.model.PedidoAtual;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
  */
 public class NovoPedido extends javax.swing.JFrame {
 
+    private List<PedidoAtual> listaPedidoAtual;
+    private double acumuladorTotalPedido = 0;
+    private DefaultComboBoxModel<String> modeloComboBoxFuncionarios;
+    private List<Funcionario> listaFuncionarios;
+    private List<Cardapio> listaCardapio;
+
     /**
      * Creates new form NovoPedido
      */
     public NovoPedido() {
         initComponents();
+        listaPedidoAtual = new ArrayList<>();
+        modeloComboBoxFuncionarios = new DefaultComboBoxModel<>();
+        listaFuncionarios = FuncionarioDAO.obterListaFuncionarios();
+    }
+    
+    public void atualizarComboBoxFuncionarios() {
+        for(Funcionario f : listaFuncionarios)
+            modeloComboBoxFuncionarios.addElement(f.getNome());
+        
+        comboBoxFuncionario.setModel(modeloComboBoxFuncionarios);
+    }
+    
+    public void preencherTabelaPedidoAtual() {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPedidoAtual.getModel();
+        modelo.setNumRows(0);
+        
+        for(PedidoAtual p : listaPedidoAtual) {
+            modelo.addRow(new Object[] {
+                p.getIdItemCardapio(),
+                p.getNome(),
+                p.getPreco(),
+                p.getQtde()
+            });
+        }
+    }
+    
+    public void preencherTabelaCardapio() {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCardapio.getModel();
+        modelo.setNumRows(0);
+        
+        for(Cardapio c : CardapioDAO.obterListaCardapio()) {
+            modelo.addRow(new Object[] {
+                c.getIdItemCardapio(),
+                c.getNome(),
+                c.getDescricao(),
+                c.getPreco(),
+                c.getIdCategoria(),
+                c.getAtivo()
+            });
+        }
     }
 
     /**
@@ -27,6 +90,7 @@ public class NovoPedido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnAtualizarCardapio = new javax.swing.JButton();
         scrollPaneCardapio = new javax.swing.JScrollPane();
         tabelaCardapio = new javax.swing.JTable();
         painelTabelaDoPedido = new javax.swing.JPanel();
@@ -44,27 +108,44 @@ public class NovoPedido extends javax.swing.JFrame {
         PainelNavegacao = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         painelAcoesPedido = new javax.swing.JPanel();
-        labelQtd = new javax.swing.JLabel();
+        nomeProdutoAtual = new javax.swing.JLabel();
         txtQuantidadeProduto = new javax.swing.JTextField();
-        btnFecharrPedido = new javax.swing.JButton();
-        labelQtd1 = new javax.swing.JLabel();
-        txtPesquisa = new javax.swing.JTextField();
+        btnAdicionarProdutoNoPedido = new javax.swing.JButton();
+        labelQtd = new javax.swing.JLabel();
+        campoBusca = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
         btnCancelarPedido = new javax.swing.JButton();
         painelDadosPedido = new javax.swing.JPanel();
         labelValorTotalPedido = new javax.swing.JLabel();
-        comboBoxCategoria = new javax.swing.JComboBox<>();
+        comboBoxFuncionario = new javax.swing.JComboBox<>();
         labelMesa = new javax.swing.JLabel();
         comboBoxMesa = new javax.swing.JComboBox<>();
         labelDescricao = new javax.swing.JLabel();
         labelFuncionario1 = new javax.swing.JLabel();
-        btnFecharrPedido1 = new javax.swing.JButton();
+        btnFecharPedido = new javax.swing.JButton();
         labelFuncionario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Realize um novo pedido!");
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnAtualizarCardapio.setBackground(new java.awt.Color(0, 102, 204));
+        btnAtualizarCardapio.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizarCardapio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/user_green.png"))); // NOI18N
+        btnAtualizarCardapio.setActionCommand("Atualizar cardápio");
+        btnAtualizarCardapio.setLabel("Atualizar cardápio");
+        btnAtualizarCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarCardapioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAtualizarCardapio, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 170, 30));
 
         tabelaCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,6 +167,11 @@ public class NovoPedido extends javax.swing.JFrame {
             }
         });
         tabelaCardapio.setToolTipText("");
+        tabelaCardapio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaCardapioMouseClicked(evt);
+            }
+        });
         scrollPaneCardapio.setViewportView(tabelaCardapio);
 
         getContentPane().add(scrollPaneCardapio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 580, 90));
@@ -116,9 +202,9 @@ public class NovoPedido extends javax.swing.JFrame {
         tabelaPedidoAtual.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tabelaPedidoAtual);
 
-        painelTabelaDoPedido.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 290, 90));
+        painelTabelaDoPedido.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 310, 90));
 
-        getContentPane().add(painelTabelaDoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 310, 120));
+        getContentPane().add(painelTabelaDoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 330, 120));
 
         painelLateral.setBackground(new java.awt.Color(51, 51, 51));
         painelLateral.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -201,32 +287,42 @@ public class NovoPedido extends javax.swing.JFrame {
         painelAcoesPedido.setBorder(javax.swing.BorderFactory.createTitledBorder("Produto atual"));
         painelAcoesPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelQtd.setText("NomeProdutoAqui");
-        painelAcoesPedido.add(labelQtd, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 30));
+        nomeProdutoAtual.setText(".");
+        painelAcoesPedido.add(nomeProdutoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 30));
         painelAcoesPedido.add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 70, 30));
 
-        btnFecharrPedido.setBackground(new java.awt.Color(204, 255, 204));
-        btnFecharrPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
-        btnFecharrPedido.setText("Adicionar ao pedido");
-        btnFecharrPedido.setToolTipText("Finalizar pedido");
-        painelAcoesPedido.add(btnFecharrPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 170, 30));
+        btnAdicionarProdutoNoPedido.setBackground(new java.awt.Color(204, 255, 204));
+        btnAdicionarProdutoNoPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/add.png"))); // NOI18N
+        btnAdicionarProdutoNoPedido.setText("Adicionar ao pedido");
+        btnAdicionarProdutoNoPedido.setToolTipText("Finalizar pedido");
+        btnAdicionarProdutoNoPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarProdutoNoPedidoActionPerformed(evt);
+            }
+        });
+        painelAcoesPedido.add(btnAdicionarProdutoNoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 170, 30));
 
-        labelQtd1.setText("Quantidade:");
-        painelAcoesPedido.add(labelQtd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, 50));
+        labelQtd.setText("Quantidade:");
+        painelAcoesPedido.add(labelQtd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, 50));
 
         getContentPane().add(painelAcoesPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 580, 60));
 
-        txtPesquisa.setToolTipText("Pesquise produtos por nome");
-        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+        campoBusca.setToolTipText("Pesquise produtos por nome");
+        campoBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisaActionPerformed(evt);
+                campoBuscaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 490, 30));
+        getContentPane().add(campoBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 320, 30));
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/icons8-pesquisar-100.png"))); // NOI18N
         btnPesquisar.setToolTipText("Pesquisar pedido");
-        getContentPane().add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 80, 30));
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 70, 30));
 
         btnCancelarPedido.setBackground(new java.awt.Color(255, 0, 0));
         btnCancelarPedido.setForeground(new java.awt.Color(255, 255, 255));
@@ -245,34 +341,38 @@ public class NovoPedido extends javax.swing.JFrame {
         painelDadosPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelValorTotalPedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        labelValorTotalPedido.setText("Valor");
-        painelDadosPedido.add(labelValorTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 80, 30));
+        labelValorTotalPedido.setText("0,00");
+        painelDadosPedido.add(labelValorTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 80, 30));
 
-        comboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        painelDadosPedido.add(comboBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 109, -1));
+        painelDadosPedido.add(comboBoxFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 100, -1));
 
         labelMesa.setText("Mesa:");
-        painelDadosPedido.add(labelMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, 30));
+        painelDadosPedido.add(labelMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 40, 30));
 
-        comboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        painelDadosPedido.add(comboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 95, -1));
+        comboBoxMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        painelDadosPedido.add(comboBoxMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 50, 100, -1));
 
-        labelDescricao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelDescricao.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         labelDescricao.setForeground(new java.awt.Color(0, 153, 0));
         labelDescricao.setText("Total do Pedido: R$");
-        painelDadosPedido.add(labelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 140, 30));
+        painelDadosPedido.add(labelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 130, 30));
 
         labelFuncionario1.setText("Funcionário:");
         painelDadosPedido.add(labelFuncionario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, 30));
 
         getContentPane().add(painelDadosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 240, 120));
 
-        btnFecharrPedido1.setBackground(new java.awt.Color(51, 204, 0));
-        btnFecharrPedido1.setForeground(new java.awt.Color(255, 255, 255));
-        btnFecharrPedido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/accept.png"))); // NOI18N
-        btnFecharrPedido1.setText("Fechar pedido");
-        btnFecharrPedido1.setToolTipText("Finalizar pedido");
-        getContentPane().add(btnFecharrPedido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 470, 390, -1));
+        btnFecharPedido.setBackground(new java.awt.Color(51, 204, 0));
+        btnFecharPedido.setForeground(new java.awt.Color(255, 255, 255));
+        btnFecharPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/restaurante/tep/view/images/accept.png"))); // NOI18N
+        btnFecharPedido.setText("Fechar pedido");
+        btnFecharPedido.setToolTipText("Finalizar pedido");
+        btnFecharPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharPedidoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFecharPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 470, 390, -1));
 
         labelFuncionario.setText("Selecione produtos na tabela e adicione ao pedido:");
         getContentPane().add(labelFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 270, 290, 30));
@@ -291,10 +391,27 @@ public class NovoPedido extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_PrincipalpedidosMouseClicked
 
-
-    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaActionPerformed
+    private void campoBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscaActionPerformed
+        String pesquisaAtual = campoBusca.getText();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCardapio.getModel();
+        modelo.setNumRows(0);
+        
+        for(Cardapio c : listaCardapio) {
+            if(     c.getNome().toLowerCase().contains(pesquisaAtual) 
+                    || c.getNome().toUpperCase().contains(pesquisaAtual)
+                    || c.getNome().contains(pesquisaAtual)) {
+                modelo.addRow(new Object[] {
+                    c.getIdItemCardapio(),
+                    c.getNome(),
+                    c.getDescricao(),
+                    c.getPreco(),
+                    c.getIdCategoria(),
+                    c.getAtivo()
+                });
+            }
+        }
+    }//GEN-LAST:event_campoBuscaActionPerformed
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
         // TODO add your handling code here:
@@ -304,6 +421,147 @@ public class NovoPedido extends javax.swing.JFrame {
         this.dispose();
         new Pedidos().setVisible(true);
     }//GEN-LAST:event_btnCancelarPedidoActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        atualizarComboBoxFuncionarios();
+        preencherTabelaCardapio();
+    }//GEN-LAST:event_formComponentShown
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        String pesquisaAtual = campoBusca.getText();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCardapio.getModel();
+        modelo.setNumRows(0);
+        
+        for(Cardapio c : CardapioDAO.obterListaCardapio()) {
+            if(     c.getNome().toLowerCase().contains(pesquisaAtual) 
+                    || c.getNome().toUpperCase().contains(pesquisaAtual)
+                    || c.getNome().contains(pesquisaAtual)) {
+                modelo.addRow(new Object[] {
+                    c.getIdItemCardapio(),
+                    c.getNome(),
+                    c.getDescricao(),
+                    c.getPreco(),
+                    c.getIdCategoria(),
+                    c.getAtivo()
+                });
+            }
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnAtualizarCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCardapioActionPerformed
+        preencherTabelaCardapio();
+    }//GEN-LAST:event_btnAtualizarCardapioActionPerformed
+
+    private void tabelaCardapioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCardapioMouseClicked
+        if(tabelaCardapio.getSelectedRow() != -1) {
+            nomeProdutoAtual.setText(tabelaCardapio.getValueAt(tabelaCardapio.getSelectedRow(), 1).toString());
+        }
+    }//GEN-LAST:event_tabelaCardapioMouseClicked
+    
+    private void limparCampos() {
+        campoBusca.setText("");
+        nomeProdutoAtual.setText(".");
+        txtQuantidadeProduto.setText("");
+    }
+    
+    private int obterIdFuncionarioPorNome(String nomeFun) {
+        int idFinal = -1;
+        for(Funcionario f : listaFuncionarios) {
+            if(nomeFun.equals(f.getNome()))
+                idFinal =  f.getIdFun();
+        }
+        
+        return idFinal;
+    }
+    
+    private void btnAdicionarProdutoNoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoNoPedidoActionPerformed
+        if(tabelaCardapio.getSelectedRow() != -1) {
+            
+            if(!"".equals(txtQuantidadeProduto.getText()) && Integer.parseInt(txtQuantidadeProduto.getText()) > 0) {
+                int codigoProdAtual = Integer.parseInt(tabelaCardapio.getValueAt(tabelaCardapio.getSelectedRow(), 0).toString());
+                String nomeProdAtual = tabelaCardapio.getValueAt(tabelaCardapio.getSelectedRow(), 1).toString();
+                double precoProdAtual = Double.parseDouble(tabelaCardapio.getValueAt(tabelaCardapio.getSelectedRow(), 3).toString());
+                int qtdeProdAtual = Integer.parseInt(txtQuantidadeProduto.getText());
+                
+                acumuladorTotalPedido += precoProdAtual * qtdeProdAtual;
+
+                PedidoAtual p = new PedidoAtual(
+                    codigoProdAtual,
+                    nomeProdAtual,
+                    precoProdAtual,
+                    qtdeProdAtual
+                );
+
+                listaPedidoAtual.add(p);
+                preencherTabelaPedidoAtual();
+                labelValorTotalPedido.setText(String.format("%.2f", acumuladorTotalPedido));
+                limparCampos();
+                
+            } else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Digite uma quantidade válida de\n" + 
+                    tabelaCardapio.getValueAt(tabelaCardapio.getSelectedRow(), 1).toString(),
+                    "Erro ao inserir produto",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_btnAdicionarProdutoNoPedidoActionPerformed
+
+    private boolean inserirDetalhesPedido() {
+        DetalhesPedido detalhesPedAtual = new DetalhesPedido();
+        
+        Pedido pedidoAtual = PedidoDAO.obterUltimoPedido();
+        detalhesPedAtual.setIdPedido(pedidoAtual.getIdPedido());
+        
+        int contadorInsercoes = 0;
+        
+        for(int i = 0; i < listaPedidoAtual.size(); i++) {
+            detalhesPedAtual.setIdItemCardapio(listaPedidoAtual.get(i).getIdItemCardapio());
+            detalhesPedAtual.setQuantidade(listaPedidoAtual.get(i).getQtde());
+            detalhesPedAtual.setPreco(listaPedidoAtual.get(i).getPreco());
+            
+            DetalhesPedidoDAO.inserirDetalhesPedido(detalhesPedAtual);
+            contadorInsercoes += 1;
+        }
+        
+        return (contadorInsercoes == listaPedidoAtual.size());
+    }
+    
+    private void btnFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharPedidoActionPerformed
+        Pedido pedidoGeral = new Pedido();
+        String nomeFuncionarioEscolhido = comboBoxFuncionario.getSelectedItem().toString();
+        
+        Calendar cal = Calendar.getInstance();
+        java.util.Date dataAtual = cal.getTime();
+        java.sql.Date dataSQL = new java.sql.Date(dataAtual.getTime());
+        
+        pedidoGeral.setDataPedido(dataSQL);
+        pedidoGeral.setIdFun(obterIdFuncionarioPorNome(nomeFuncionarioEscolhido));
+        pedidoGeral.setIdMesa(Integer.parseInt(comboBoxMesa.getSelectedItem().toString()));
+        
+        PedidoDAO.inserirPedido(pedidoGeral);
+        
+        if(inserirDetalhesPedido()) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Pedido registrado com sucessso!",
+                    "Relatório de cadastro de pedido",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            this.dispose();
+            new Pedidos().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Erro ao registrar pedido!",
+                    "Relatório de cadastro de pedido",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnFecharPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,11 +602,13 @@ public class NovoPedido extends javax.swing.JFrame {
     private javax.swing.JPanel PainelNavegacao;
     private javax.swing.JLabel Principalpedidos;
     private javax.swing.JLabel SairPedidos;
+    private javax.swing.JButton btnAdicionarProdutoNoPedido;
+    private javax.swing.JButton btnAtualizarCardapio;
     private javax.swing.JButton btnCancelarPedido;
-    private javax.swing.JButton btnFecharrPedido;
-    private javax.swing.JButton btnFecharrPedido1;
+    private javax.swing.JButton btnFecharPedido;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JComboBox<String> comboBoxCategoria;
+    private javax.swing.JTextField campoBusca;
+    private javax.swing.JComboBox<String> comboBoxFuncionario;
     private javax.swing.JComboBox<String> comboBoxMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -362,8 +622,8 @@ public class NovoPedido extends javax.swing.JFrame {
     private javax.swing.JLabel labelFuncionario1;
     private javax.swing.JLabel labelMesa;
     private javax.swing.JLabel labelQtd;
-    private javax.swing.JLabel labelQtd1;
     private javax.swing.JLabel labelValorTotalPedido;
+    private javax.swing.JLabel nomeProdutoAtual;
     private javax.swing.JPanel painelAcoesPedido;
     private javax.swing.JPanel painelCabecalho;
     private javax.swing.JPanel painelDadosPedido;
@@ -372,7 +632,6 @@ public class NovoPedido extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollPaneCardapio;
     private javax.swing.JTable tabelaCardapio;
     private javax.swing.JTable tabelaPedidoAtual;
-    private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtQuantidadeProduto;
     // End of variables declaration//GEN-END:variables
 }

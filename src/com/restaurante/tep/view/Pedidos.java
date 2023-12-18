@@ -221,14 +221,14 @@ public class Pedidos extends javax.swing.JFrame {
         tabelaPedidos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tabelaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null}
             },
             new String [] {
-                "Código", "Data", "Total", "Descrição", "Status", "Quantidade"
+                "Código", "Data", "Total", "Qtd produtos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
