@@ -4,7 +4,11 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/1manuelc/crud-restaurante-tep?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/1manuelc/crud-restaurante-tep?style=for-the-badge)
 
-<img src="" alt="Tela principal do projeto">
+<div align="center">
+   <img src="./resources/print-telaprincipal.jpeg" alt="Tela principal do projeto" width="450px">
+</div>
+
+<br/>
 
 > O projeto final da disciplina "Tópicos Especiais em Programação" estabeleceu que criássemos um CRUD em Java com GUI usando a temática "Restaurante".
 
@@ -120,4 +124,4 @@ Estando na tela principal, você agora pode manipular os CRUD's de Funcionários
 
 ## 📝 Licença
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
