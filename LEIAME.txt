@@ -1,0 +1,9 @@
+INSTRUÇÕES DE USO:
+
+Ao iniciar o projeto, é necessário executar o seguinte comando no MySQL Workbench "CREATE DATABASE Restaurante";
+
+A partir disso, na tela de login há um botão que povoa o banco automaticamente, sendo não necessário executar todo o script do banco.
+
+Login padrão:
+Usuário: 000.000.000.-00
+Senha: 12345678

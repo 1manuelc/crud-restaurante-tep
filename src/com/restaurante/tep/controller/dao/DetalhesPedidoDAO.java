@@ -159,6 +159,62 @@ public class DetalhesPedidoDAO {
 
         return detalhesPedido;
     }
+    
+    public static DetalhesPedido obterDetalhesPedidoPorIdPedido(int id) {
+        String consultaAtual = ConsultasSQL.OBTER_DETALHES_PEDIDO_POR_ID_PEDIDO;
+        ResultSet resultados = null;
+        DetalhesPedido detalhesPedido = null;
+
+        try (Connection conexao = ConnectionFactory.obterConexaoComMySQL();
+             PreparedStatement consultaPreparada = ObjectTools.obterConsultaPreparada(consultaAtual, conexao)) {
+
+            if (consultaPreparada != null) {
+                consultaPreparada.setInt(1, id);
+                resultados = consultaPreparada.executeQuery();
+
+                if (resultados.next()) {
+                    detalhesPedido = new DetalhesPedido(
+                            resultados.getInt("IdDetalhesPed"),
+                            resultados.getInt("IdPedido"),
+                            resultados.getInt("IdItemCardapio"),
+                            resultados.getInt("Quantidade"),
+                            resultados.getDouble("Preco")
+                    );
+                    System.out.println("DetalhesPedido de id " + id + " obtido!");
+
+                } else {
+                    System.err.println("DetalhesPedido de id " + id + " inexistente!");
+                    return null;
+                }
+            } else throw new IllegalStateException("Consulta preparada não inicializada corretamente.");
+
+        } catch (IllegalStateException e) {
+            ObjectTools.imprimirErro(
+                    "Erro ao obter resultados da consulta", 115, "DetalhesPedidoDAO",
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+        } catch (SQLException e) {
+            ObjectTools.imprimirErro(
+                    "Erro ao conectar ao banco de dados", 115, "DetalhesPedidoDAO",
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+
+        } finally {
+            try {
+                ObjectTools.fecharObjetos(resultados);
+            } catch (SQLException e) {
+                ObjectTools.imprimirErro(
+                        "Erro ao fechar resultados", 155, "DetalhesPedidoDAO",
+                        e.getMessage(),
+                        Arrays.toString(e.getStackTrace())
+                );
+            }
+        }
+
+        return detalhesPedido;
+    }
 
     public static boolean deletarDetalhesPedidoPorId(int id) {
         boolean operacaoBemSucedida = false;
@@ -194,5 +250,77 @@ public class DetalhesPedidoDAO {
         }
 
         return operacaoBemSucedida;
+    }
+    
+    public static boolean deletarDetalhesPedidoPorIdPedido(int id) {
+        boolean operacaoBemSucedida = false;
+        String consultaAtual = ConsultasSQL.DELETAR_DETALHES_PEDIDO_POR_ID_PED;
+
+        try (Connection conexao = ConnectionFactory.obterConexaoComMySQL();
+             PreparedStatement consultaPreparada = ObjectTools.obterConsultaPreparada(consultaAtual, conexao)) {
+
+            if (consultaPreparada != null) {
+                consultaPreparada.setInt(1, id);
+                int linhasAfetadas = consultaPreparada.executeUpdate();
+
+                if (linhasAfetadas == 0) {
+                    System.err.println("DetalhesPedido de id " + id + " inexistente!");
+                } else {
+                    operacaoBemSucedida = true;
+                    System.out.println("DetalhesPedido de id " + id + " deletado!");
+                }
+            } else throw new IllegalStateException("Consulta preparada não inicializada corretamente.");
+
+        } catch (IllegalStateException e) {
+            ObjectTools.imprimirErro(
+                    "Erro ao executar consulta", 213, "DetalhesPedidoDAO",
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+        } catch (SQLException e) {
+            ObjectTools.imprimirErro(
+                    "Erro ao conectar ao banco de dados", 213, "DetalhesPedidoDAO",
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+        }
+
+        return operacaoBemSucedida;
+    }
+    
+    public static int countQuantidadePedidos() {
+        String consultaAtual = ConsultasSQL.SELECT_COUNT_PEDIDOS;
+        ResultSet resultados = null;
+        int countQtde = 0;
+
+        try (Connection conexao = ConnectionFactory.obterConexaoComMySQL();
+             PreparedStatement consultaPreparada = ObjectTools.obterConsultaPreparada(consultaAtual, conexao)) {
+
+            if (consultaPreparada != null) {
+                resultados = consultaPreparada.executeQuery();
+                
+                if (resultados.next()) {
+                    countQtde = resultados.getInt("COUNT_QTDE_TOTAL");
+                } else {
+                     System.err.println("Erro no select!");
+                }
+            } else {
+                throw new IllegalStateException("Consulta preparada não inicializada corretamente.");
+            }
+
+        } catch (IllegalStateException e) {
+            ObjectTools.imprimirErro(
+                    "Erro ao preparar consulta", 20, "DetalhesPedidoDAO",
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+        } catch (SQLException e) {
+            ObjectTools.imprimirErro(
+                    "Erro ao conectar ao banco de dados", 20, "DetalhesPedidoDAO",
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+        }
+        return countQtde;
     }
 }

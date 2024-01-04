@@ -34,9 +34,20 @@ public class ConsultasSQL {
             "SELECT * FROM tbDetalhesPed\n" +
             "WHERE IdDetalhesPed = ?";
     
+    public static final String OBTER_DETALHES_PEDIDO_POR_ID_PEDIDO =
+            "SELECT * FROM tbDetalhesPed\n" +
+            "WHERE IdPedido = ?";
+    
     public static final String DELETAR_DETALHES_PEDIDO_POR_ID =
             "DELETE FROM tbDetalhesPed\n" +
             "WHERE IdDetalhesPed = ?";
+    
+    public static final String DELETAR_DETALHES_PEDIDO_POR_ID_PED =
+            "DELETE FROM tbDetalhesPed\n" +
+            "WHERE IdPedido = ?";
+    
+    public static final String SELECT_COUNT_PEDIDOS = 
+            "SELECT COUNT(*) COUNT_QTDE_TOTAL FROM tbPedidos;";
     
     public static final String INSERIR_PEDIDO =
             "INSERT INTO tbPedidos\n" +

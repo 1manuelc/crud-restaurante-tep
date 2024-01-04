@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package com.restaurante.tep.view;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import com.restaurante.tep.controller.dao.PedidoDAO;
+import com.restaurante.tep.model.Pedido;
+import com.restaurante.tep.controller.dao.DetalhesPedidoDAO;
+import com.restaurante.tep.model.DetalhesPedido;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,8 +23,46 @@ public class Pedidos extends javax.swing.JFrame {
      */
     public Pedidos() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPedidos.getModel();
+        tabelaPedidos.setRowSorter(new TableRowSorter(modelo));
     }
 
+    public void preencherTabelaPedidos() {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPedidos.getModel();
+        modelo.setNumRows(0);
+        int idPedido;
+        double totalPedido;
+        
+        for(Pedido p : PedidoDAO.obterListaPedidos()) {
+            idPedido = p.getIdPedido();
+            
+            DetalhesPedido dp = DetalhesPedidoDAO.obterDetalhesPedidoPorId(idPedido);
+            totalPedido = dp.getQuantidade() * dp.getPreco();
+            
+            modelo.addRow(new Object[] {
+                p.getIdPedido(),
+                p.getDataPedido(),
+                totalPedido,
+                dp.getQuantidade()
+            });
+        }
+    }
+    
+    public int quantidadeGeral() {
+        return DetalhesPedidoDAO.countQuantidadePedidos();
+    }
+    
+    public double somatorioTotalPedidos() {
+        double somatorioTotalPedido = 0;
+        double totalPedido;
+        
+        for(DetalhesPedido dp : DetalhesPedidoDAO.obterListaDetalhesPedidos()) {
+            totalPedido = dp.getQuantidade() * dp.getPreco();
+            somatorioTotalPedido += totalPedido;
+        }
+        return somatorioTotalPedido;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +100,11 @@ public class Pedidos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Confira os pedidos!");
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setToolTipText("");
@@ -161,7 +211,6 @@ public class Pedidos extends javax.swing.JFrame {
         txtValorTotalPedidos.setBackground(new java.awt.Color(255, 255, 255));
         txtValorTotalPedidos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtValorTotalPedidos.setForeground(new java.awt.Color(255, 255, 255));
-        txtValorTotalPedidos.setText("Valor");
         txtValorTotalPedidos.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 txtValorTotalPedidosComponentAdded(evt);
@@ -290,7 +339,35 @@ public class Pedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_SairPedidosMouseClicked
 
     private void btnExcluirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPedidoActionPerformed
-
+        if(tabelaPedidos.getSelectedRow() != -1) {
+            int idPedAtual = Integer.parseInt(tabelaPedidos.getValueAt(tabelaPedidos.getSelectedRow(), 0).toString());
+            if(DetalhesPedidoDAO.deletarDetalhesPedidoPorId(idPedAtual)) {
+                if(PedidoDAO.deletarPedidoPorId(idPedAtual)) {
+                    JOptionPane.showMessageDialog(
+                    null,
+                    "Pedido de id " + idPedAtual + " excluído com sucesso",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    preencherTabelaPedidos();
+                    String quantidadeGeral = String.valueOf(quantidadeGeral());
+                    String somatorioTotalPedidos = String.valueOf(somatorioTotalPedidos());
+                    jTQtdeGeral.setText(quantidadeGeral);
+                    txtValorTotalPedidos.setText(somatorioTotalPedidos);
+                } else {
+                    JOptionPane.showMessageDialog(
+                    null,
+                    "Erro ao excluir o pedido",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Erro ao excluir o pedido",
+                    "Relatório de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnExcluirPedidoActionPerformed
 
     private void btnNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoPedidoActionPerformed
@@ -314,6 +391,14 @@ public class Pedidos extends javax.swing.JFrame {
     private void txtValorTotalPedidosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_txtValorTotalPedidosComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorTotalPedidosComponentAdded
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        preencherTabelaPedidos();
+        String quantidadeGeral = String.valueOf(quantidadeGeral());
+        String somatorioTotalPedidos = String.valueOf(somatorioTotalPedidos());
+        jTQtdeGeral.setText(quantidadeGeral);
+        txtValorTotalPedidos.setText(somatorioTotalPedidos);
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
