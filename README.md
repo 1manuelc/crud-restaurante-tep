@@ -16,11 +16,12 @@
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-- Você instalou a versão mais recente de `MySQL Workbench, XAMPP & NetBeans IDE`
-- Você tem uma máquina `Windows / Linux`. Indique qual sistema operacional é compatível / não compatível.
+- Você instalou a versão mais recente de `MySQL Workbench, XAMPP & NetBeans IDE`.
+- Você tem uma máquina `Windows / Linux`.
 - Você leu `a seção "Usando"`.
 
 ## 🚀 Clonando
+
 ```
 gh repo clone 1manuelc/crud-restaurante-tep
 ```
